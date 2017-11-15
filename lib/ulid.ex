@@ -3,12 +3,7 @@ defmodule Ulid do
   @random_length 16
 
   def generate do
-    milliseconds_timestamp = :os.timestamp
-      |> Tuple.to_list
-      |> Enum.join
-      |> String.to_integer
-      |> (&(&1 / 1000)).()
-      |> round
+    milliseconds_timestamp = System.system_time(:milli_seconds)
 
     Ulid.Time.encode(milliseconds_timestamp, @time_length)
       <> Ulid.Random.encode(@random_length)
