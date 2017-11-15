@@ -1,6 +1,5 @@
 defmodule UlidTest do
   use ExUnit.Case, async: true
-  doctest Ulid.Time
 
   test "generates 26 characters" do
     assert String.length(Ulid.generate) == 26

@@ -3,16 +3,6 @@ defmodule Ulid.Utils do
   @mask 0x1F
   @bits 5
 
-  def encoding, do: @encoding
-
-  def concatenate_encodings(positions) do
-    positions
-      |> Enum.reduce("", fn(position, output) ->
-          output <> String.at(@encoding, position)
-        end)
-      |> String.reverse
-  end
-
   def encode(<<num::unsigned-size(128)>>) do
     encode(num, "") |> String.pad_leading(26, "0")
   end
