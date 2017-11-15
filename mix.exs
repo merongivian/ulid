@@ -29,7 +29,7 @@ defmodule Ulid.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:benchfella, "~> 0.3.5", only: [:dev, :test]}]
   end
 
   defp description do
