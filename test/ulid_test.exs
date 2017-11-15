@@ -7,6 +7,7 @@ defmodule UlidTest do
 
   test "is sortable" do
     ulid1 = Ulid.generate
+    Process.sleep(1)
     ulid2 = Ulid.generate
 
     assert ulid2 > ulid1
