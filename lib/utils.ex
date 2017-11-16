@@ -1,16 +1,11 @@
 defmodule Ulid.Utils do
   @encoding "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
-  @mask 0x1F
-  @bits 5
 
-  def encode(<<num::unsigned-size(128)>>) do
-    encode(num, "") |> String.pad_leading(26, "0")
-  end
+  def encode(<<_::unsigned-size(128)>> = bytes), do: encode_bytes(<<0::2, bytes::binary>>, <<>>)
 
-  defp encode(0, acc), do: acc
-  defp encode(n, acc) do
-    index = :erlang.band(n, @mask)
-    char = String.at(@encoding, index)
-    encode(:erlang.bsr(n, @bits), char <> acc)
+  defp encode_bytes(<<index::unsigned-size(5), rest::bitstring>>, acc) do
+    <<_::bytes-size(index), char::bytes-size(1), _::binary>> = @encoding
+    encode_bytes(rest, acc <> char)
   end
+  defp encode_bytes(<<>>, acc), do: acc
 end
