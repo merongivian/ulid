@@ -1,16 +1,9 @@
 defmodule Ulid do
-  @time_length 10
-  @random_length 16
+  def generate(timestamp \\ System.system_time(:milli_seconds)) do
+    Ulid.Utils.encode(generate_binary(timestamp))
+  end
 
-  def generate do
-    milliseconds_timestamp = :os.timestamp
-      |> Tuple.to_list
-      |> Enum.join
-      |> String.to_integer
-      |> (&(&1 / 1000)).()
-      |> round
-
-    Ulid.Time.encode(milliseconds_timestamp, @time_length)
-      <> Ulid.Random.encode(@random_length)
+  def generate_binary(timestamp \\ System.system_time(:milli_seconds)) do
+    <<timestamp::unsigned-size(48), :crypto.strong_rand_bytes(10)::binary>>
   end
 end

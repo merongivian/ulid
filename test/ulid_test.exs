@@ -1,6 +1,5 @@
 defmodule UlidTest do
   use ExUnit.Case, async: true
-  doctest Ulid.Time
 
   test "generates 26 characters" do
     assert String.length(Ulid.generate) == 26
@@ -8,6 +7,7 @@ defmodule UlidTest do
 
   test "is sortable" do
     ulid1 = Ulid.generate
+    Process.sleep(1)
     ulid2 = Ulid.generate
 
     assert ulid2 > ulid1
