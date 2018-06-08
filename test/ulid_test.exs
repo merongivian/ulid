@@ -12,4 +12,12 @@ defmodule UlidTest do
 
     assert ulid2 > ulid1
   end
+
+  test "decode time" do
+    current_time = System.system_time(:milli_seconds)
+    decoded_time = Ulid.Utils.decode_time(Ulid.generate(current_time));
+
+    assert decoded_time == current_time
+  end
+  
 end
