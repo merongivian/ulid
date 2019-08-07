@@ -1,13 +1,6 @@
-defmodule UlidBench do
-  use Benchfella
-
-  bench "generate" do
-    Ulid.generate()
-    nil
-  end
-
-  bench "generate_binary" do
-    Ulid.generate_binary()
-    nil
-  end
-end
+Benchee.run(
+  %{
+    "generate" => fn -> Ulid.generate() end,
+    "generate_binary" => fn -> Ulid.generate_binary() end
+  }
+)
