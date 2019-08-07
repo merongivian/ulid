@@ -116,8 +116,44 @@ r is Randomness
 
 ## Test Suite
 
-```
+```sh
 mix test
+```
+
+### Benchmarking
+
+To run the benchmarks yourself, just do the following
+
+```sh
+mix run bench/ulid_bench.exs
+```
+
+```
+Operating System: Linux
+CPU Information: Intel(R) Xeon(R) CPU E5-2630 v2 @ 2.60GHz
+Number of Available Cores: 24
+Available memory: 62.92 GB
+Elixir 1.8.2
+Erlang 22.0.7
+
+Benchmark suite executing with the following configuration:
+warmup: 2 s
+time: 5 s
+memory time: 0 ns
+parallel: 1
+inputs: none specified
+Estimated total run time: 14 s
+
+Benchmarking generate...
+Benchmarking generate_binary...
+
+Name                      ips        average  deviation         median         99th %
+generate_binary      484.37 K        2.06 μs  ±1231.73%        1.91 μs        2.75 μs
+generate             159.64 K        6.26 μs   ±417.75%        5.56 μs       12.53 μs
+
+Comparison:
+generate_binary      484.37 K
+generate             159.64 K - 3.03x slower +4.20 μs
 ```
 
 ### Credits and references:
